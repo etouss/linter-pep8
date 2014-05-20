@@ -19,6 +19,8 @@ class LinterPep8 extends Linter
   regex: ':(?<line>\\d+):(?<col>\\d+): ((?<error>E\\d+)|(?<warning>W\\d+)) (?<message>.*?)\n'
 
   constructor: (editorView)->
+    
+    super(editorView)
     @executablePath = atom.config.get 'linter-pep8.pep8ExecutablePath'
 
     atom.config.observe 'linter-pep8.maxLineLength', =>
@@ -44,7 +46,7 @@ class LinterPep8 extends Linter
 
     if errorCodes and errorCodes.length > 0
       cmd = "#{cmd} --ignore=#{errorCodes.toString()}"
-
     @cmd = cmd
+
 
 module.exports = LinterPep8
